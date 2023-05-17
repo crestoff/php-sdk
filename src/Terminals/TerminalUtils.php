@@ -99,7 +99,7 @@ class TerminalUtils
         } elseif ($amount === 0) {
             return "000";
         } else {
-            return preg_replace('/[^0-9]/', '', sprintf('%01.2f', $amount));
+            return (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $amount));
         }
     }
     
