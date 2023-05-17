@@ -123,7 +123,7 @@ class GpEcomRecurringRequestBuilder implements IRequestBuilder
                     $request->appendChild($xml->createElement("defaultcard", 1));
                 } elseif ($builder->entity instanceof Schedule) {
                     $schedule = $builder->entity;
-                    $amount = preg_replace('/[^0-9]/', '', sprintf('%01.2f', $schedule->amount));
+                    $amount = (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $schedule->amount));
                     $frequency = EnumMapping::mapScheduleFrequency(
                         GatewayProvider::GP_ECOM,
                         $schedule->frequency
