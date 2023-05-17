@@ -76,7 +76,7 @@ class GpEcomAuthorizationRequestBuilder extends GpEcomRequestBuilder
         }
 
         if (isset($builder->amount)) {
-            $amount = $xml->createElement("amount", preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)));
+            $amount = $xml->createElement("amount", (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)));
             $amount->setAttribute("currency", $builder->currency ?? '');
             $request->appendChild($amount);
         }
@@ -290,7 +290,7 @@ class GpEcomAuthorizationRequestBuilder extends GpEcomRequestBuilder
                             $timestamp,
                             $config->merchantId,
                             $orderId,
-                            preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
+                            (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
                             $builder->currency,
                             $recurring->customerKey,
                         ])
@@ -313,7 +313,7 @@ class GpEcomAuthorizationRequestBuilder extends GpEcomRequestBuilder
                         $timestamp,
                         $config->merchantId,
                         $orderId,
-                        preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
+                        (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
                         $builder->currency,
                         $recurring->customerKey,
                     ])
@@ -356,7 +356,7 @@ class GpEcomAuthorizationRequestBuilder extends GpEcomRequestBuilder
                     $timestamp,
                     $config->merchantId,
                     $orderId,
-                    preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
+                    (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
                     $builder->currency,
                     $builder->paymentMethod->alternativePaymentMethodType,
                 ])
@@ -544,7 +544,7 @@ class GpEcomAuthorizationRequestBuilder extends GpEcomRequestBuilder
             $timestamp,
             $config->merchantId,
             $orderId,
-            preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
+            (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
             $builder->currency,
             $card->number
         ];
@@ -557,7 +557,7 @@ class GpEcomAuthorizationRequestBuilder extends GpEcomRequestBuilder
                         $timestamp,
                         $config->merchantId,
                         $orderId,
-                        preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
+                        (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)),
                         $builder->currency,
                         $card->token
                     ];
