@@ -211,7 +211,7 @@ class GpEcomConnector extends XmlGateway implements IPaymentGateway, IRecurringS
 
         $orderId = isset($builder->orderId) ? $builder->orderId : GenerationUtils::generateOrderId();
         $timestamp = isset($builder->timestamp) ? $builder->timestamp : GenerationUtils::generateTimestamp();
-        $amount = preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount));
+        $amount = (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount));
 
         $this->setSerializeData('MERCHANT_ID', $this->config->merchantId);
         $this->setSerializeData('ACCOUNT', $this->config->accountId);
@@ -422,7 +422,7 @@ class GpEcomConnector extends XmlGateway implements IPaymentGateway, IRecurringS
             $timestamp,
             $this->config->merchantId,
             $orderId,
-            ($builder->amount !== null) ? preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)) : null,
+            ($builder->amount !== null) ? (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)) : null,
             $builder->currency,
         ];
 
