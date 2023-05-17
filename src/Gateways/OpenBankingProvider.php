@@ -49,7 +49,7 @@ class OpenBankingProvider extends RestGateway implements IOpenBankingProvider
         $httpVerb = $endpoint = $payload = null;
         $timestamp = (new \DateTime())->format("YmdHis");
         $orderId = isset($builder->orderId) ? $builder->orderId : GenerationUtils::generateOrderId();
-        $amount = ($builder->amount !== null) ? preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)) : null;
+        $amount = ($builder->amount !== null) ? (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)) : null;
         /** @var BankPayment $paymentMethod */
         $paymentMethod = $builder->paymentMethod;
         switch ($builder->transactionType) {
