@@ -56,7 +56,7 @@ class GpEcomManagementRequestBuilder extends GpEcomRequestBuilder
         }
 
         if ($builder->amount !== null) {
-            $amount = $xml->createElement("amount", preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)));
+            $amount = $xml->createElement("amount", (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)));
             $amount->setAttribute("currency", $builder->currency ?? '');
             $request->appendChild($amount);
         } elseif ($builder->transactionType === TransactionType::CAPTURE) {
@@ -117,7 +117,7 @@ class GpEcomManagementRequestBuilder extends GpEcomRequestBuilder
             $timestamp,
             $config->merchantId,
             $orderId,
-            ($builder->amount !== null ? preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)) : ''),
+            ($builder->amount !== null ? (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->amount)) : ''),
             ($builder->currency !== null ? $builder->currency : ''),
             ($builder->alternativePaymentType !== null ? $builder->alternativePaymentType : '')
         ];
