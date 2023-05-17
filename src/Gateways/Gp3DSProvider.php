@@ -196,14 +196,14 @@ class Gp3DSProvider extends RestGateway implements ISecure3dProvider
 
             // order details
             $request['order'] = [];
-            $request['order'] = $this->maybeSetKey($request['order'], 'amount', preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->getAmount())));
+            $request['order'] = $this->maybeSetKey($request['order'], 'amount', (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->getAmount())));
             $request['order'] = $this->maybeSetKey($request['order'], 'currency', $builder->getCurrency());
             $request['order'] = $this->maybeSetKey($request['order'], 'id', $orderId);
             $request['order'] = $this->maybeSetKey($request['order'], 'address_match_indicator', ($builder->isAddressMatchIndicator() ? true : false));
             $request['order'] = $this->maybeSetKey($request['order'], 'date_time_created', (new \DateTime($builder->getOrderCreateDate()))->format(\DateTime::RFC3339_EXTENDED));
             $request['order'] = $this->maybeSetKey($request['order'], 'gift_card_count', $builder->getGiftCardCount());
             $request['order'] = $this->maybeSetKey($request['order'], 'gift_card_currency', $builder->getGiftCardCurrency());
-            $request['order'] = $this->maybeSetKey($request['order'], 'gift_card_amount', preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->getGiftCardAmount())));
+            $request['order'] = $this->maybeSetKey($request['order'], 'gift_card_amount', (int)preg_replace('/[^0-9]/', '', sprintf('%01.2f', $builder->getGiftCardAmount())));
             $request['order'] = $this->maybeSetKey($request['order'], 'delivery_email', $builder->getDeliveryEmail());
             $request['order'] = $this->maybeSetKey($request['order'], 'delivery_timeframe', $builder->getDeliveryTimeframe());
             $request['order'] = $this->maybeSetKey($request['order'], 'shipping_method', $builder->getShippingMethod());
